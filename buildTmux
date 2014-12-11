@@ -1,0 +1,22 @@
+#! /bin/env bash
+
+mkdir ~/tmp
+cd ~/tmp
+
+curl -O https://cloud.github.com/downloads/libevent/libevent/libevent-2.0.21-stable.tar.gz
+tar xzvf libevent-2.0.21-stable.tar.gz
+cd libevent-2.0.21-stable
+
+./configure && make
+sudo make install
+
+cd ~/tmp
+wget "http://downloads.sourceforge.net/tmux/tmux-1.9a.tar.gz"
+tar xvf tmux-1.9a.tar.gz
+cd tmux-1.9a
+LDFLAGS="-L/usr/local/lib -Wl,-rpath=/usr/local/lib" ./configure --prefix=/usr/local
+make
+sudo make install
+
+cd ~
+rm -fr ~/tmp
